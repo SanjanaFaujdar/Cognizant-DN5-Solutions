@@ -1,0 +1,20 @@
+.scoreCard {
+  font-family: Arial, sans-serif;
+  margin: 20px auto;
+  padding: 20px;
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+}
+
+.scoreCard h2 {
+  color: #333;
+  text-align: center;
+}
+
+.scoreCard p {
+  font-size: 16px;
+  color: #555;
+}
