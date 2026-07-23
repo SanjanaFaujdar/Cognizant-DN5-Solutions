@@ -1,0 +1,78 @@
+<div class="enrollment-form">
+  <h2>Enrollment Request Form</h2>
+
+  <form [formGroup]="enrollForm" (ngSubmit)="onSubmit()">
+
+    <!-- Student Name -->
+    <div>
+      <label>Student Name:</label>
+      <input type="text" formControlName="studentName" />
+      <span *ngIf="enrollForm.get('studentName')?.touched &&
+                   enrollForm.get('studentName')?.errors?.['required']">
+        Name is required
+      </span>
+      <span *ngIf="enrollForm.get('studentName')?.touched &&
+                   enrollForm.get('studentName')?.errors?.['minlength']">
+        Name must be at least 3 characters
+      </span>
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label>Email:</label>
+      <input type="email" formControlName="email" />
+      <span *ngIf="enrollForm.get('email')?.touched &&
+                   enrollForm.get('email')?.errors?.['required']">
+        Email is required
+      </span>
+    </div>
+
+    <!-- Course ID -->
+    <div>
+      <label>Course ID:</label>
+      <input type="number" formControlName="courseId" />
+    </div>
+
+    <!-- Preferred Semester -->
+    <div>
+      <label>Preferred Semester:</label>
+      <select formControlName="preferredSemester">
+        <option value="Odd">Odd</option>
+        <option value="Even">Even</option>
+      </select>
+    </div>
+
+    <!-- Agree to Terms -->
+    <div>
+      <input type="checkbox" formControlName="agreeToTerms" />
+      <label>Agree to Terms</label>
+    </div>
+
+    <!-- Additional Courses -->
+    <div formArrayName="additionalCourses">
+      <div *ngFor="let course of additionalCourses.controls;
+                   let i = index">
+        <input [formControlName]="i"
+               placeholder="Additional Course" />
+        <button type="button"
+                (click)="removeCourse(i)">Remove</button>
+      </div>
+    </div>
+    <button type="button" (click)="addCourse()">
+      Add Additional Course
+    </button>
+
+    <!-- Submit and Reset -->
+    <div>
+      <button type="submit"
+              [disabled]="enrollForm.invalid">Submit</button>
+      <button type="button" (click)="onReset()">Reset</button>
+    </div>
+
+    <!-- Success Message -->
+    <div *ngIf="enrollForm.valid">
+      <p>Enrollment Request submitted successfully!</p>
+    </div>
+
+  </form>
+</div>
